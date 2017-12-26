@@ -1,0 +1,15 @@
+C:\Users\Kamil Sagalara\Source\Repos\KryptografiaWizualna\KryptografiaWizualna\bin\Debug\KryptografiaWizualna.exe.config
+C:\Users\Kamil Sagalara\Source\Repos\KryptografiaWizualna\KryptografiaWizualna\bin\Debug\KryptografiaWizualna.exe
+C:\Users\Kamil Sagalara\Source\Repos\KryptografiaWizualna\KryptografiaWizualna\bin\Debug\KryptografiaWizualna.pdb
+C:\Users\Kamil Sagalara\Source\Repos\KryptografiaWizualna\KryptografiaWizualna\obj\Debug\KryptografiaWizualna.csprojResolveAssemblyReference.cache
+C:\Users\Kamil Sagalara\Source\Repos\KryptografiaWizualna\KryptografiaWizualna\obj\Debug\MainWindow.g.cs
+C:\Users\Kamil Sagalara\Source\Repos\KryptografiaWizualna\KryptografiaWizualna\obj\Debug\App.g.cs
+C:\Users\Kamil Sagalara\Source\Repos\KryptografiaWizualna\KryptografiaWizualna\obj\Debug\KryptografiaWizualna_MarkupCompile.cache
+C:\Users\Kamil Sagalara\Source\Repos\KryptografiaWizualna\KryptografiaWizualna\obj\Debug\KryptografiaWizualna_MarkupCompile.lref
+C:\Users\Kamil Sagalara\Source\Repos\KryptografiaWizualna\KryptografiaWizualna\obj\Debug\MainWindow.baml
+C:\Users\Kamil Sagalara\Source\Repos\KryptografiaWizualna\KryptografiaWizualna\obj\Debug\KryptografiaWizualna.g.resources
+C:\Users\Kamil Sagalara\Source\Repos\KryptografiaWizualna\KryptografiaWizualna\obj\Debug\KryptografiaWizualna.Properties.Resources.resources
+C:\Users\Kamil Sagalara\Source\Repos\KryptografiaWizualna\KryptografiaWizualna\obj\Debug\KryptografiaWizualna.csproj.GenerateResource.Cache
+C:\Users\Kamil Sagalara\Source\Repos\KryptografiaWizualna\KryptografiaWizualna\obj\Debug\KryptografiaWizualna.csproj.CoreCompileInputs.cache
+C:\Users\Kamil Sagalara\Source\Repos\KryptografiaWizualna\KryptografiaWizualna\obj\Debug\KryptografiaWizualna.exe
+C:\Users\Kamil Sagalara\Source\Repos\KryptografiaWizualna\KryptografiaWizualna\obj\Debug\KryptografiaWizualna.pdb

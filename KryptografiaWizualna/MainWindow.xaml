@@ -1,0 +1,48 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:KryptografiaWizualna"
+        xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="KryptografiaWizualna.MainWindow"
+        mc:Ignorable="d"
+        Title="Kryptografia wizualna" Height="600" Width="800" ResizeMode="NoResize">
+    <Grid>
+        <TabControl HorizontalAlignment="Left" Height="570" VerticalAlignment="Top" Width="794" Margin="0,0,-0.4,0">
+            <TabControl.Background>
+                <ImageBrush/>
+            </TabControl.Background>
+            <TabItem Header="Program wersja podstawowa">
+                <Grid Background="#FFB0F67B">
+                    <Image x:Name="ImageInput" HorizontalAlignment="Left" Height="238" Margin="10,10,0,0" VerticalAlignment="Top" Width="377" Source="Images/loadImg.jpg" Stretch="Fill"/>
+                    <Button x:Name="ButtonLoadImg" HorizontalAlignment="Left" VerticalAlignment="Top" Width="377" Margin="10,252,0,0" Height="34" Content="Wczytaj obraz" FontSize="20" Click="ButtonLoadImg_Click"/>
+                    <Image x:Name="ImageComponent1" HorizontalAlignment="Left" Height="241" VerticalAlignment="Top" Width="377" Margin="10,291,0,0" Stretch="UniformToFill" Source="Images/udzial1.jpg"/>
+                    <Image x:Name="ImageComponent2" HorizontalAlignment="Left" Height="241" VerticalAlignment="Top" Width="377" Margin="401,291,0,0" Stretch="UniformToFill" Source="Images/udzial2.jpg"/>
+                    <TextBox x:Name="TextBoxRedThreshold" HorizontalAlignment="Left" Height="18" TextWrapping="Wrap" Text="R" VerticalAlignment="Top" Width="52" Margin="682,196,0,0" TextChanged="TextBoxRedThreshold_TextChanged"/>
+                    <TextBox x:Name="TextBoxGreenThreshold" HorizontalAlignment="Left" Height="18" TextWrapping="Wrap" Text="G" VerticalAlignment="Top" Width="52" Margin="682,229,0,0" TextChanged="TextBoxGreenThreshold_TextChanged"/>
+                    <TextBox x:Name="TextBoxBlueThreshold" HorizontalAlignment="Left" Height="18" TextWrapping="Wrap" Text="B" VerticalAlignment="Top" Width="52" Margin="682,263,0,0" TextChanged="TextBoxBlueThreshold_TextChanged"/>
+                    <Slider x:Name="SliderRedColor" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="404,196,0,0" Width="279" Maximum="255" SmallChange="1" ValueChanged="SliderRedColor_ValueChanged" IsSnapToTickEnabled="True"
+    TickFrequency="1"/>
+                    <Slider x:Name="SliderGreenColor" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="404,229,0,0" Width="279" Maximum="255" SmallChange="1" ValueChanged="SliderGreenColor_ValueChanged" IsSnapToTickEnabled="True"
+    TickFrequency="1" Value="127"/>
+                    <Slider x:Name="SliderBlueColor" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="404,263,0,0" Width="279" Maximum="255" SmallChange="1" ValueChanged="SliderBlueColor_ValueChanged" IsSnapToTickEnabled="True"
+    TickFrequency="1" Value="127"/>
+                    <Button x:Name="ButtonEncryptBasic" HorizontalAlignment="Left" VerticalAlignment="Top" Width="374" Margin="404,10,0,0" Height="53" Content="Szyfruj" FontSize="20" Click="ButtonEncryptBasic_Click"/>
+                    <CheckBox x:Name="CheckBoxTransparent" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="404,68,0,0" Height="27" Width="369" FontSize="20" Content="Przezroczysty zamiast białego"/>
+                    <TextBox x:Name="TextBoxComponents" HorizontalAlignment="Left" Height="33" TextWrapping="Wrap" Text="Udział" VerticalAlignment="Top" Width="141" Margin="404,158,0,0" FontSize="20"/>
+                    <TextBox HorizontalAlignment="Left" Height="39" TextWrapping="Wrap" Text="Nazwa udziałów:" VerticalAlignment="Top" Width="230" Margin="404,114,0,0" IsReadOnly="True" Background="#FFCACACA" FontSize="20"/>
+                    <ComboBox x:Name="ComboBoxImageFormat" HorizontalAlignment="Left" VerticalAlignment="Top" Width="84" Margin="550,158,0,0" SelectedIndex="0" FontSize="20">
+                        <ComboBoxItem Content=".bmp"/>
+                        <ComboBoxItem Content=".jpg"/>
+                        <ComboBoxItem Content=".png"/>
+                    </ComboBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Info">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+        </TabControl>
+        <TextBlock HorizontalAlignment="Left" Margin="824,151,-38.4,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
+
+    </Grid>
+</Window>
