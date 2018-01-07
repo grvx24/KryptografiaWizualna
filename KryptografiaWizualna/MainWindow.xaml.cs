@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -24,6 +25,8 @@ namespace KryptografiaWizualna
     public partial class MainWindow : Window
     {
         private VisualCryptoBasic cryptoBasic = new VisualCryptoBasic();
+        Bitmap[] bmpArray = new Bitmap[3];
+
 
         public BitmapImage ConvertBitmap(System.Drawing.Bitmap bitmap)
         {
@@ -77,34 +80,58 @@ namespace KryptografiaWizualna
                 return;
             }
 
-
             if (cryptoBasic.ImageLoaded)
             {
                 try
                 {
-                    var result=cryptoBasic.Encrypt(R, G, B, (bool)CheckBoxTransparent.IsChecked);
-                    ImageComponent1.Source = ConvertBitmap(result[0]);
-                    ImageComponent2.Source = ConvertBitmap(result[1]);
-
-                    for (int i = 0; i < result.Length; i++)
+                    if (RadioButton2Pixels.IsChecked == true)
                     {
-                        result[i].Save(TextBoxComponents.Text + i+ComboBoxImageFormat.Text);
+                        var result = cryptoBasic.Encrypt2PixVersion(R, G, B, (bool)CheckBoxTransparent.IsChecked);
+                        ImageComponent1.Source = ConvertBitmap(result[0]);
+                        ImageComponent2.Source = ConvertBitmap(result[1]);
+
+                        for (int i = 0; i < result.Length; i++)
+                        {
+                            result[i].Save(TextBoxComponents.Text + i + ComboBoxImageFormat.Text);
+                        }
+
+                        MessageBox.Show("Obrazy zapisane pomyślnie!");
+
+                        Process.Start(Directory.GetCurrentDirectory());
+                    }
+                    if (RadioButton4Pixels.IsChecked == true)
+                    {
+                        var result = cryptoBasic.Encrypt(R, G, B, (bool)CheckBoxTransparent.IsChecked);
+                        ImageComponent1.Source = ConvertBitmap(result[0]);
+                        ImageComponent2.Source = ConvertBitmap(result[1]);
+
+                        for (int i = 0; i < result.Length; i++)
+                        {
+                            result[i].Save(TextBoxComponents.Text + i + ComboBoxImageFormat.Text);
+                        }
+
+                        MessageBox.Show("Obrazy zapisane pomyślnie!");
+
+                        Process.Start(Directory.GetCurrentDirectory());
                     }
 
-                    MessageBox.Show("Obrazy zapisane pomyślnie!");
-
-                    Process.Start(Directory.GetCurrentDirectory());
 
 
-            }catch(Exception ex)
+
+                }
+                catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
                 }
-                
-            }else
+
+            }
+            else
             {
                 MessageBox.Show("Nie wczytano obrazu");
             }
+
+
+
         }
 
         private void SliderRedColor_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -170,5 +197,103 @@ namespace KryptografiaWizualna
                 return;
             }
         }
+
+        private void AssemblingComponentsComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void AssembleComponentsButton_Click(object sender, RoutedEventArgs e)
+        {
+
+            try
+            {
+                Bitmap result = null;
+
+                if (bmpArray[0] != null && bmpArray[1] != null || string.IsNullOrEmpty(ResultFileTextBox.Text))
+                {
+                    if (RadioBtn2px.IsChecked == true)
+                    {
+                        result = cryptoBasic.AssembleComponents(bmpArray, 2, 2, (bool)CheckBoxNoiseReduction.IsChecked);
+                    }
+                    if (RadioBtn4px.IsChecked == true)
+                    {
+                        result = cryptoBasic.AssembleComponents(bmpArray, 4, 2, (bool)CheckBoxNoiseReduction.IsChecked);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Nie wczytano wszystkich potrzebnych udziałów lub pole nazwa pliku jest puste!");
+                    return;
+                }
+
+                if (result != null)
+                {
+                    result.Save(ResultFileTextBox.Text + ComboBoxImageFormatAssemble.Text);
+                    ImageAfterAssemble.Source = ConvertBitmap(result);
+
+                    Process.Start(Directory.GetCurrentDirectory());
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return;
+            }
+            
+        }
+
+        private void LoadComponent1Button_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            string filename="";
+            if (openFileDialog.ShowDialog() == true)
+            {
+                bmpArray[0] = new Bitmap(openFileDialog.FileName);
+                filename = openFileDialog.SafeFileName;
+            }
+
+            if(bmpArray[0]!=null)
+            {
+                if(!string.IsNullOrEmpty(filename))
+                {
+                    Component1LoadInfo.Text = "Wczytano: " + filename;
+                    Component1LoadInfo.Foreground = System.Windows.Media.Brushes.Green;
+                }
+                else
+                {
+                    Component1LoadInfo.Text = "Nie wczytano: " + filename;
+                    Component1LoadInfo.Foreground = System.Windows.Media.Brushes.Red;
+                    bmpArray[0] = null;
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("Nie wczytano obrazu!");
+            }
+        }
+
+        private void LoadComponent2Button_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            string filename = "";
+            if (openFileDialog.ShowDialog() == true)
+            {
+                bmpArray[1] = new Bitmap(openFileDialog.FileName);
+                filename = openFileDialog.SafeFileName;
+            }
+
+            if (bmpArray[1] != null)
+            {
+                Component2LoadInfo.Text = "Wczytano: " + filename;
+                Component2LoadInfo.Foreground = System.Windows.Media.Brushes.Green;
+            }
+            else
+            {
+                MessageBox.Show("Nie wczytano obrazu!");
+            }
+        }
+
     }
 }

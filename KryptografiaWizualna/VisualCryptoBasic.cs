@@ -16,6 +16,19 @@ namespace KryptografiaWizualna
                                                     {0,0,1,1 },{1,0,0,1 },{0,1,1,0 } };
 
 
+        //public static int[,] pixelsMatrix1_3components = new int[,] { { 0,0,0,1,1,1,0,1,1 },
+        //    { 0,0,1,1,0,1,0,1,1 },{0,0,1,0,0,1,1,1,1},
+        //    {0,0,1,0,1,1,0,1,1 },{0,0,1,1,0,0,1,1,1},{0,0,0,0,1,1,1,1,1},
+        //{0,0,0,1,1,0,1,1,1 },{0,0,1,1,1,0,1,0,1 },{0,0,1,1,0,1,1,0,1 } };
+
+        //public static int[,] pixelsMatrix2_3components = new int[,] { { 0,0,0,0,1,1,1,1,1 },
+        //    { 1,1,1,1,0,1,0,0,0 },{1,0,0,1,1,1,0,1,0 },
+        //    {0,1,0,0,1,0,1,1,1 },{1,0,1,0,1,1,0,1,0},{1,0,1,0 } };
+
+        //public static int[,] pixelsMatrix3_3components = new int[,] { { 0,0,1,1 },{ 1,1,0,0 },{1,0,0,1 },
+        //                                            {0,1,0,1 },{1,0,0,1 },{1,0,1,0 } };
+
+
         private Bitmap bmp;
         public bool ImageLoaded = false;
 
@@ -34,80 +47,211 @@ namespace KryptografiaWizualna
             }
         }
 
-        public Bitmap AssembleComponents(Bitmap[] components, bool removeNoise = false)
+        private Color MapToColorReversed(int value, bool whiteAsTransparent = false)
         {
-            if (components.Length != 2)
+            if (value == 1)
             {
-                throw new ArgumentException("Liczba udziałów musi być równa 2!");
+                return Color.Black;
             }
+            else
+            {
+                if (whiteAsTransparent)
+                    return Color.Transparent;
+                else
+                    return Color.White;
+            }
+        }
+
+        public Bitmap AssembleComponents(Bitmap[] components,int numOfSubpixels,int numOfComponents, bool removeNoise = false)
+        {
 
             if (components[0].Size != components[1].Size)
             {
                 throw new ArgumentException("Obrazy muszą być tej samej wielkości!");
             }
 
-
-            int width = components[0].Width;
-            int height = components[0].Height;
-            Console.WriteLine(width + " " + height);
-
-            Bitmap result = new Bitmap(width, height);
-
-            for (int i = 0; i < height; i += 2)
+            if(numOfSubpixels == 2)
             {
-                for (int j = 0; j < width; j += 2)
+                int width = components[0].Width;
+                int height = components[0].Height;
+                Console.WriteLine(width + " " + height);
+
+                Bitmap result = new Bitmap(width, height);
+                
+                for (int i = 0; i < height; i ++)
                 {
-                    bool pixelBlockIsEqual = true;
-
-                    Color[] c1 = new Color[4];
-                    c1[0] = components[0].GetPixel(j, i);
-                    c1[1] = components[0].GetPixel(j + 1, i);
-                    c1[2] = components[0].GetPixel(j, i + 1);
-                    c1[3] = components[0].GetPixel(j + 1, i + 1);
-
-                    Color[] c2 = new Color[4];
-                    c2[0] = components[1].GetPixel(j, i);
-                    c2[1] = components[1].GetPixel(j + 1, i);
-                    c2[2] = components[1].GetPixel(j, i + 1);
-                    c2[3] = components[1].GetPixel(j + 1, i + 1);
-
-                    for (int k = 0; k < c1.Length; k++)
+                    for (int j = 0; j < width; j += 2)
                     {
-                        if (c1[k] != c2[k])
+                        bool pixelBlockIsEqual = true;
+
+                        Color[] c1 = new Color[2];
+                        c1[0] = components[0].GetPixel(j, i);
+                        c1[1] = components[0].GetPixel(j + 1, i);
+
+                        Color[] c2 = new Color[2];
+                        c2[0] = components[1].GetPixel(j, i);
+                        c2[1] = components[1].GetPixel(j + 1, i);
+
+                        for (int k = 0; k < c1.Length; k++)
                         {
-                            pixelBlockIsEqual = false;
+                            if (c1[k] != c2[k])
+                            {
+                                pixelBlockIsEqual = false;
+                            }
                         }
-                    }
 
-                    if (pixelBlockIsEqual)
-                    {
-                        if (!removeNoise)
+                        if (pixelBlockIsEqual)
                         {
-                            result.SetPixel(j, i, c1[0]);
-                            result.SetPixel(j + 1, i, c1[1]);
-                            result.SetPixel(j, i + 1, c1[2]);
-                            result.SetPixel(j + 1, i + 1, c1[3]);
+                            if (!removeNoise)
+                            {
+                                result.SetPixel(j, i, c1[0]);
+                                result.SetPixel(j + 1, i, c1[1]);
+                            }
+                            else
+                            {
+                                result.SetPixel(j, i, Color.White);
+                                result.SetPixel(j + 1, i, Color.White);
+                            }
+
                         }
                         else
                         {
-                            result.SetPixel(j, i, Color.White);
-                            result.SetPixel(j + 1, i, Color.White);
-                            result.SetPixel(j, i + 1, Color.White);
-                            result.SetPixel(j + 1, i + 1, Color.White);
+                            result.SetPixel(j, i, Color.Black);
+                            result.SetPixel(j + 1, i, Color.Black);
+                        }
+                    }
+                }
+
+                return result;
+            }
+            else 
+            {
+                int width = components[0].Width;
+                int height = components[0].Height;
+                Console.WriteLine(width + " " + height);
+
+                Bitmap result = new Bitmap(width, height);
+
+                for (int i = 0; i < height; i += 2)
+                {
+                    for (int j = 0; j < width; j += 2)
+                    {
+                        bool pixelBlockIsEqual = true;
+
+                        Color[] c1 = new Color[4];
+                        c1[0] = components[0].GetPixel(j, i);
+                        c1[1] = components[0].GetPixel(j + 1, i);
+                        c1[2] = components[0].GetPixel(j, i + 1);
+                        c1[3] = components[0].GetPixel(j + 1, i + 1);
+
+                        Color[] c2 = new Color[4];
+                        c2[0] = components[1].GetPixel(j, i);
+                        c2[1] = components[1].GetPixel(j + 1, i);
+                        c2[2] = components[1].GetPixel(j, i + 1);
+                        c2[3] = components[1].GetPixel(j + 1, i + 1);
+
+                        for (int k = 0; k < c1.Length; k++)
+                        {
+                            if (c1[k] != c2[k])
+                            {
+                                pixelBlockIsEqual = false;
+                            }
                         }
 
+                        if (pixelBlockIsEqual)
+                        {
+                            if (!removeNoise)
+                            {
+                                result.SetPixel(j, i, c1[0]);
+                                result.SetPixel(j + 1, i, c1[1]);
+                                result.SetPixel(j, i + 1, c1[2]);
+                                result.SetPixel(j + 1, i + 1, c1[3]);
+                            }
+                            else
+                            {
+                                result.SetPixel(j, i, Color.White);
+                                result.SetPixel(j + 1, i, Color.White);
+                                result.SetPixel(j, i + 1, Color.White);
+                                result.SetPixel(j + 1, i + 1, Color.White);
+                            }
+
+
+                        }
+                        else
+                        {
+                            result.SetPixel(j, i, Color.Black);
+                            result.SetPixel(j + 1, i, Color.Black);
+                            result.SetPixel(j, i + 1, Color.Black);
+                            result.SetPixel(j + 1, i + 1, Color.Black);
+                        }
+
+
+                    }
+                }
+
+                return result;
+            }
+
+        }
+
+        public Bitmap[] Encrypt2PixVersion(int thresholdR = 127, int thresholdG = 127, int thresholdB = 127, bool whiteAsTransparent = false)
+        {
+            if (thresholdR < 0 || thresholdR > 255)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+            if (thresholdG < 0 || thresholdG > 255)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+            if (thresholdB < 0 || thresholdB > 255)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+
+            if (bmp == null)
+            {
+                throw new NullReferenceException("Nie wczytano obrazu!");
+            }
+
+            int width = bmp.Width;
+            int height = bmp.Height;
+
+            Bitmap[] components = new Bitmap[] { new Bitmap(width * 2, height), new Bitmap(width * 2, height) };
+
+            Random rng = new Random();
+
+            for (int i = 0; i < height; i++)
+            {
+                for (int j = 0; j < width; j++)
+                {
+                    Color c = bmp.GetPixel(j, i);
+
+                    if (c.R > thresholdR && c.G > thresholdG && c.B > thresholdB)
+                    {
+                        int randomIndex = rng.Next(0, 2);
+
+                        components[0].SetPixel(j * 2, i, MapToColor(randomIndex, whiteAsTransparent));
+                        components[0].SetPixel(j * 2 + 1, i, MapToColor(~randomIndex&1, whiteAsTransparent));
+      
+                        components[1].SetPixel(j * 2, i, MapToColor(randomIndex, whiteAsTransparent));
+                        components[1].SetPixel(j * 2 + 1, i, MapToColor(~randomIndex & 1, whiteAsTransparent));
                     }
                     else
                     {
-                        result.SetPixel(j, i, Color.Black);
-                        result.SetPixel(j + 1, i, Color.Black);
-                        result.SetPixel(j, i + 1, Color.Black);
-                        result.SetPixel(j + 1, i + 1, Color.Black);
+                        int randomIndex = rng.Next(0, 2);
+                        components[0].SetPixel(j * 2, i , MapToColor(randomIndex, whiteAsTransparent));
+                        components[0].SetPixel(j * 2 + 1, i , MapToColor(~randomIndex & 1, whiteAsTransparent));
+
+                        components[1].SetPixel(j * 2, i, MapToColor(~randomIndex & 1, whiteAsTransparent));
+                        components[1].SetPixel(j * 2 + 1, i, MapToColor(randomIndex, whiteAsTransparent));
+
                     }
                 }
             }
 
-            return result;
+
+            return components;
         }
 
 
@@ -179,9 +323,6 @@ namespace KryptografiaWizualna
             return components;
 
         }
-
-
-
 
         public void LoadImage(string path)
         {

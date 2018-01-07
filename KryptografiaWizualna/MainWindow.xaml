@@ -13,36 +13,108 @@
                 <ImageBrush/>
             </TabControl.Background>
             <TabItem Header="Program wersja podstawowa">
-                <Grid Background="#FFB0F67B">
+                <Grid>
+                    <Grid.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="White" Offset="0"/>
+                            <GradientStop Color="Gray" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Grid.Background>
                     <Image x:Name="ImageInput" HorizontalAlignment="Left" Height="238" Margin="10,10,0,0" VerticalAlignment="Top" Width="377" Source="Images/loadImg.jpg" Stretch="Fill"/>
-                    <Button x:Name="ButtonLoadImg" HorizontalAlignment="Left" VerticalAlignment="Top" Width="377" Margin="10,252,0,0" Height="34" Content="Wczytaj obraz" FontSize="20" Click="ButtonLoadImg_Click"/>
-                    <Image x:Name="ImageComponent1" HorizontalAlignment="Left" Height="241" VerticalAlignment="Top" Width="377" Margin="10,291,0,0" Stretch="UniformToFill" Source="Images/udzial1.jpg"/>
-                    <Image x:Name="ImageComponent2" HorizontalAlignment="Left" Height="241" VerticalAlignment="Top" Width="377" Margin="401,291,0,0" Stretch="UniformToFill" Source="Images/udzial2.jpg"/>
-                    <TextBox x:Name="TextBoxRedThreshold" HorizontalAlignment="Left" Height="18" TextWrapping="Wrap" Text="R" VerticalAlignment="Top" Width="52" Margin="682,196,0,0" TextChanged="TextBoxRedThreshold_TextChanged"/>
-                    <TextBox x:Name="TextBoxGreenThreshold" HorizontalAlignment="Left" Height="18" TextWrapping="Wrap" Text="G" VerticalAlignment="Top" Width="52" Margin="682,229,0,0" TextChanged="TextBoxGreenThreshold_TextChanged"/>
-                    <TextBox x:Name="TextBoxBlueThreshold" HorizontalAlignment="Left" Height="18" TextWrapping="Wrap" Text="B" VerticalAlignment="Top" Width="52" Margin="682,263,0,0" TextChanged="TextBoxBlueThreshold_TextChanged"/>
+                    <Button BorderThickness="5" x:Name="ButtonLoadImg" HorizontalAlignment="Left" VerticalAlignment="Top" Width="377" Margin="10,252,0,0" Height="50" Content="Wczytaj obraz" FontSize="20" Click="ButtonLoadImg_Click">
+                        <Button.BorderBrush>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="Black" Offset="0"/>
+                                <GradientStop Color="Black" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Button.BorderBrush>
+                        <Button.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FFFF1200" Offset="0"/>
+                                <GradientStop Color="#FFFEFF05" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
+                    <RadioButton IsChecked="True" x:Name="RadioButton2Pixels" Content="2 subpiksele" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="652,139,0,0"/>
+                    <RadioButton x:Name="RadioButton4Pixels" Content="4 subpiksele" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="652,159,0,0"/>
+                    <Image x:Name="ImageComponent1" HorizontalAlignment="Left" Height="225" VerticalAlignment="Top" Width="377" Margin="10,307,0,0" Stretch="UniformToFill" Source="Images/udzial1.jpg"/>
+                    <Image x:Name="ImageComponent2" HorizontalAlignment="Left" Height="225" VerticalAlignment="Top" Width="377" Margin="401,307,0,0" Stretch="UniformToFill" Source="Images/udzial2.jpg"/>
+                    <TextBox x:Name="TextBoxRedThreshold" HorizontalAlignment="Left" Height="18" TextWrapping="Wrap" Text="R" VerticalAlignment="Top" Width="39" Margin="682,196,0,0" TextChanged="TextBoxRedThreshold_TextChanged"/>
+                    <TextBox x:Name="TextBoxGreenThreshold" HorizontalAlignment="Left" Height="18" TextWrapping="Wrap" Text="G" VerticalAlignment="Top" Width="39" Margin="682,229,0,0" TextChanged="TextBoxGreenThreshold_TextChanged"/>
+                    <TextBox x:Name="TextBoxBlueThreshold" HorizontalAlignment="Left" Height="18" TextWrapping="Wrap" Text="B" VerticalAlignment="Top" Width="39" Margin="682,263,0,0" TextChanged="TextBoxBlueThreshold_TextChanged"/>
                     <Slider x:Name="SliderRedColor" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="404,196,0,0" Width="279" Maximum="255" SmallChange="1" ValueChanged="SliderRedColor_ValueChanged" IsSnapToTickEnabled="True"
-    TickFrequency="1"/>
+    TickFrequency="1" Value="127"/>
                     <Slider x:Name="SliderGreenColor" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="404,229,0,0" Width="279" Maximum="255" SmallChange="1" ValueChanged="SliderGreenColor_ValueChanged" IsSnapToTickEnabled="True"
     TickFrequency="1" Value="127"/>
                     <Slider x:Name="SliderBlueColor" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="404,263,0,0" Width="279" Maximum="255" SmallChange="1" ValueChanged="SliderBlueColor_ValueChanged" IsSnapToTickEnabled="True"
     TickFrequency="1" Value="127"/>
-                    <Button x:Name="ButtonEncryptBasic" HorizontalAlignment="Left" VerticalAlignment="Top" Width="374" Margin="404,10,0,0" Height="53" Content="Szyfruj" FontSize="20" Click="ButtonEncryptBasic_Click"/>
+                    <Button BorderThickness="5" x:Name="ButtonEncryptBasic" HorizontalAlignment="Left" VerticalAlignment="Top" Width="374" Margin="404,10,0,0" Height="53" Content="Szyfruj" FontSize="20" Click="ButtonEncryptBasic_Click" BorderBrush="Black">
+                        <Button.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FFFF1200" Offset="0"/>
+                                <GradientStop Color="#FFFEFF05" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
                     <CheckBox x:Name="CheckBoxTransparent" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="404,68,0,0" Height="27" Width="369" FontSize="20" Content="Przezroczysty zamiast białego"/>
                     <TextBox x:Name="TextBoxComponents" HorizontalAlignment="Left" Height="33" TextWrapping="Wrap" Text="Udział" VerticalAlignment="Top" Width="141" Margin="404,158,0,0" FontSize="20"/>
-                    <TextBox HorizontalAlignment="Left" Height="39" TextWrapping="Wrap" Text="Nazwa udziałów:" VerticalAlignment="Top" Width="230" Margin="404,114,0,0" IsReadOnly="True" Background="#FFCACACA" FontSize="20"/>
                     <ComboBox x:Name="ComboBoxImageFormat" HorizontalAlignment="Left" VerticalAlignment="Top" Width="84" Margin="550,158,0,0" SelectedIndex="0" FontSize="20">
+                        <ComboBox.Background>
+                            <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                <GradientStop Color="#FFF0F0F0" Offset="0"/>
+                                <GradientStop Color="#FF00DEFD" Offset="1"/>
+                            </LinearGradientBrush>
+                        </ComboBox.Background>
                         <ComboBoxItem Content=".bmp"/>
                         <ComboBoxItem Content=".jpg"/>
                         <ComboBoxItem Content=".png"/>
                     </ComboBox>
+                    <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="RED" VerticalAlignment="Top" Margin="726,197,0,0" Width="34" Height="18" FontWeight="Bold" Foreground="Red" RenderTransformOrigin="0.041,0.622"/>
+                    <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="726,229,0,0" Width="47" Height="18" FontWeight="Bold" Foreground="#FF0FFF00" Text="GREEN"/>
+                    <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="BLUE" VerticalAlignment="Top" Margin="726,263,0,0" Width="34" Height="18" FontWeight="Bold" Foreground="#FF004CFF" RenderTransformOrigin="0.182,0.544"/>
+                    <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Nazwa udziałów" VerticalAlignment="Top" Margin="404,115,0,0" Width="171" Height="38" FontWeight="Bold" Foreground="Black" RenderTransformOrigin="0.041,0.622" FontSize="22"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Info">
+            <TabItem Header="Składanie udziałów" Background="White">
+                <Grid>
+                    <Grid.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="White" Offset="0"/>
+                            <GradientStop Color="Gray" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Grid.Background>
+
+                    <Image x:Name="ImageAfterAssemble" HorizontalAlignment="Left" Height="425" VerticalAlignment="Top" Width="583" Margin="10,87,0,0" Source="Images/loadImg.jpg"/>
+                    <RadioButton x:Name="RadioBtn2px" Content="2 subpiksele" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,30,0,0" FontWeight="Bold"/>
+                    <RadioButton x:Name="RadioBtn4px" Content="4 subpiksele" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,54,0,0" FontWeight="Bold"/>
+                    <Button x:Name="LoadComponent1Button" Content="Wczytaj udział 1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="103" Margin="254,51,0,0" Height="21" Click="LoadComponent1Button_Click"/>
+                    <Button x:Name="LoadComponent2Button" Content="Wczytaj udział 2" HorizontalAlignment="Left" VerticalAlignment="Top" Width="103" Margin="373,51,0,0" Height="21" Click="LoadComponent2Button_Click"/>
+                    <TextBlock x:Name="Component1LoadInfo" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Nie wczytano" VerticalAlignment="Top" Margin="254,9,0,0" Width="103" FontWeight="Bold" Foreground="Red"/>
+                    <TextBlock x:Name="Component2LoadInfo" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Nie wczytano" VerticalAlignment="Top" Margin="373,9,0,0" Width="103" FontWeight="Bold" Foreground="Red"/>
+                    <Button x:Name="AssembleComponentsButton" Content="Złóż udziały" HorizontalAlignment="Left" VerticalAlignment="Top" Width="142" Margin="623,9,0,0" Height="43" Click="AssembleComponentsButton_Click"/>
+                    <TextBox x:Name="ResultFileTextBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="Wynik" VerticalAlignment="Top" Width="83" Margin="623,87,0,0"/>
+                    <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Nazwa pliku" VerticalAlignment="Top" Margin="623,66,0,0" Width="100" FontWeight="Bold"/>
+                    <ComboBox x:Name="ComboBoxImageFormatAssemble" HorizontalAlignment="Left" VerticalAlignment="Top" Width="54" Margin="711,87,0,0" SelectedIndex="0" Height="23">
+                        <ComboBox.Background>
+                            <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                <GradientStop Color="#FFF0F0F0" Offset="0"/>
+                                <GradientStop Color="#FF00DEFD" Offset="1"/>
+                            </LinearGradientBrush>
+                        </ComboBox.Background>
+                        <ComboBoxItem Content=".bmp"/>
+                        <ComboBoxItem Content=".jpg"/>
+                        <ComboBoxItem Content=".png"/>
+                    </ComboBox>
+                    <CheckBox IsChecked="True" x:Name="CheckBoxNoiseReduction" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,8,0,0" Height="16" Width="182" Content="Usunięcie szumu"/>
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="Instrukcja oraz info">
                 <Grid Background="#FFE5E5E5"/>
             </TabItem>
         </TabControl>
         <TextBlock HorizontalAlignment="Left" Margin="824,151,-38.4,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="866,262,-79.4,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>
